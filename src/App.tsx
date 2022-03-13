@@ -1,13 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import * as ReactDom from 'react-dom';
+import HelloWorld from './HelloWorld';
 
-function App() {
-  return (
-    <div className="App">
-      Hello World
-    </div>
-  );
-}
-
-export default App;
+ReactDom.render(
+  <React.StrictMode>
+    <HelloWorld />
+  </React.StrictMode>,
+  document.getElementById('app')
+);
