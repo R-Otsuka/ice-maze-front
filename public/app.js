@@ -106,7 +106,7 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
   \****************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar HelloWorld = function () { return react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null, \"Hello World!!\"); };\n/* harmony default export */ __webpack_exports__[\"default\"] = (HelloWorld);\n\n\n//# sourceURL=webpack://redux-self-test/./src/HelloWorld.tsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar HelloWorld = function () { return react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null, \"\\u304B\\u307F\\u304A\"); };\n/* harmony default export */ __webpack_exports__[\"default\"] = (HelloWorld);\n\n\n//# sourceURL=webpack://redux-self-test/./src/HelloWorld.tsx?");
 
 /***/ }),
 
