@@ -1,10 +1,16 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import HelloWorld from './HelloWorld';
+import { Provider } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from '../reducers/counterSlice.js'
+import store from './store.js' // 拡張子なしでもimportできる機能
+import HelloWorld from './helloWorld';
+
+
 
 ReactDom.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <HelloWorld />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('app')
 );
