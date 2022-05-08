@@ -1,8 +1,18 @@
-// 氷の床をカキカキ
-// reduxの必要なさ...
+import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 
-// state＝[];
-// 踏んだか否か、の判定
-// https://vigne-cla.com/9-21/
+// export type RootState = {
+//   counter: Counter
+// }
+// 作るのは氷の床
+export const IceFloor = () => {
+  // const count = useSelector((state: RootState)  => state.counter.value);
+  // const dispatch = useDispatch();
+  return (
+    <div>
+      icefloor
+    </div>
+  )
+}
 
-// 理想は、岩の数、広さ、予想難易度出す
+export default IceFloor;

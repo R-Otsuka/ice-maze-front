@@ -26,7 +26,10 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"],
   },
+  // devServerのoptionについて
+  // https://zenn.dev/sa2knight/articles/9b19ffd391bca87d7b8c#historyapifallback
   devServer: {
+    historyApiFallback: true, // 404時にindexファイルを返す
     static: {
       directory: __dirname + '/public',
     }
