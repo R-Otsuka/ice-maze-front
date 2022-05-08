@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from '../reducers/counterSlice'
-
-export type Counter = {
-  value: number
-}
+import { Counter } from '../reducers/counterSlice'
 
 export type RootState = {
   counter: Counter
 }
-
-export const Counter = () => {
+// 作るのは氷の床
+export const Count = () => {
   const count = useSelector((state: RootState)  => state.counter.value);
   const dispatch = useDispatch();
   return (
@@ -34,4 +31,4 @@ export const Counter = () => {
   )
 }
 
-export default Counter;
+export default Count;
