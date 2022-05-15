@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/R-Otsuka/redux-assets#readme",
   "devDependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@types/react": "^17.0.40",
     "html-webpack-plugin": "^5.5.0",
     "webpack": "^5.70.0",
@@ -31,11 +32,14 @@
     "@reduxjs/toolkit": "^1.8.1",
     "@types/react-dom": "^17.0.13",
     "@types/react-router-dom": "^5.3.3",
+    "axios": "^0.27.2",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1",
     "ts-loader": "^9.2.8"
   }
 }

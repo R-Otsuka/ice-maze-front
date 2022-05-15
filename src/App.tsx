@@ -3,9 +3,9 @@ import * as ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../reducers/counterSlice'
+import { decrement, increment } from './reducers/counterSlice'
 import store from './store' // 拡張子なしでもimportできる機能
-import Count from './count';
+import Count from './components/count';
 import Floor from './components/floor';
 
 
