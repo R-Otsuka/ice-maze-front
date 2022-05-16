@@ -9,5 +9,5 @@ export default configureStore({
     counter: counterReducer,
     ice: iceReducer,
   },
-  // middlewares: thunk
+  middlewares: thunk
 })

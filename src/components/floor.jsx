@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetch } from '../reducers/iceSlice'
+import { fetchSync } from '../reducers/iceSlice'
 
 export const IceFloor = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export const IceFloor = () => {
       <div>
         <button
           aria-label="Increment value"
-          onClick={() => dispatch(fetch())}
+          onClick={() => dispatch(fetchSync())}
         >
           {process.env.BUCKET_NAME}
           {maze}
