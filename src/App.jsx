@@ -8,9 +8,6 @@ import store from './store' // 拡張子なしでもimportできる機能
 import Count from './components/count';
 import Floor from './components/floor';
 
-
-
-
 // zip-frontに合わせる。
 // react-routerで出しわけする、route.jsにルーティングモリモリ書いておいて、mapで<route>でwrapしたやつ出す。
 ReactDom.render(

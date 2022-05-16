@@ -7,10 +7,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const API_PATH = 'ice';
 
 // こういうところ、icefloorとかつけなくて良くね？
-export type IceType = {
-  value: number
-}
-
 export const iceSlice = createSlice({
   name: 'ice',
   initialState: {
