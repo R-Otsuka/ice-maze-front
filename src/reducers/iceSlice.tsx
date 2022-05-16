@@ -4,20 +4,21 @@ import _ from 'lodash';
 
 import { createSlice } from '@reduxjs/toolkit'
 
-const API_PATH = 'ice_maze'
+const API_PATH = 'ice';
 
-export type IceFloor = {
+// こういうところ、icefloorとかつけなくて良くね？
+export type IceType = {
   value: number
 }
 
-export const iceFloorSlice = createSlice({
-  name: 'ice_floor',
+export const iceSlice = createSlice({
+  name: 'ice',
   initialState: {
     value: 0,
   },
   reducers: {
     fetch: (state) => {
-      const url = `${process.env.HOST}/manager/v1/${API_PATH}`;
+      const url = `${process.env.HOST}/api/${API_PATH}`;
       axios
         .get(url)
         .then((res) => {
@@ -28,6 +29,6 @@ export const iceFloorSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { fetch } = iceFloorSlice.actions
+export const { fetch } = iceSlice.actions
 
-export default iceFloorSlice.reducer
+export default iceSlice.reducer

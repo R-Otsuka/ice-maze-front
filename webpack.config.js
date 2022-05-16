@@ -1,4 +1,6 @@
+const webpack = require('webpack');
 const config = require('./config');
+const _ = require('lodash');
 
 module.exports = {
   // モード値を production に設定すると最適化された状態で、

@@ -10,6 +10,7 @@ export type RootState = {
 export const Count = () => {
   const count = useSelector((state: RootState)  => state.counter.value);
   const dispatch = useDispatch();
+  console.log(process.env);
   return (
     <div>
       <div>
@@ -17,7 +18,7 @@ export const Count = () => {
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
         >
-          Increment
+          {process.env.BUCKET_NAME}
         </button>
         <span>{count}</span>
         <button
