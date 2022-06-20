@@ -4,9 +4,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from './reducers/counterSlice'
-import store from './store' // 拡張子なしでもimportできる機能
+import store from './store'
 import Count from './components/count';
 import Floor from './components/floor';
+import Dashboard from './components/dashboard';
 
 // zip-frontに合わせる。
 // react-routerで出しわけする、route.jsにルーティングモリモリ書いておいて、mapで<route>でwrapしたやつ出す。
@@ -16,7 +17,9 @@ ReactDom.render(
       <Routes>
         <Route path="/" element={<Count />} />
         <Route path="/ice" element={<Floor />} />
-        {/* <Route path="page1" element={<Page1 />} /> */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path=":id" element={<Dashboard />} />
+        {/* <Route pth="page1" element={<Page1 />} /> */}
       </Routes>
     </BrowserRouter>
   </Provider>,
