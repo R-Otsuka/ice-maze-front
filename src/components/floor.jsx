@@ -15,14 +15,6 @@ export const IceFloor = () => {
       <div>
         <button
           aria-label="Increment value"
-          // onClick={() => dispatch(fetchSync())}
-          onClick={() =>
-            navigate("/10", { state: { id: 1 } })
-            // console.log(location)
-            // navigate(-1);
-
-            // navigate("/dashboard", { replace: true })
-          }
         >
           {process.env.BUCKET_NAME}
           {maze}
