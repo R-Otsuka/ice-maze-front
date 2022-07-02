@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import counterReducer from './reducers/counterSlice'
 import iceReducer from './reducers/iceSlice'
 import dashboardReducer from './reducers/dashboardSlice'
+import logger from 'redux-logger'
 
 // reducerをstoreに登録
 export default configureStore({
@@ -11,5 +12,5 @@ export default configureStore({
     ice: iceReducer,
     dashboard: dashboardReducer,
   },
-  middlewares: thunk
+  middleware: [thunk, logger]
 })
