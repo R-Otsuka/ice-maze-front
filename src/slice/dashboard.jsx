@@ -25,4 +25,4 @@ export const dashboardSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { increment, decrement, incrementByAmount } = dashboardSlice.actions
 
-export default dashboardSlice.reducer
+export const dashboardReducer = dashboardSlice.reducer;

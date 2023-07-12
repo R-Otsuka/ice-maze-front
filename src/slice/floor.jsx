@@ -16,20 +16,19 @@ const floorSlice = createSlice({
   name: 'floor',
   initialState,
   reducers: {
-    fetch: (state, action) => {
+    fetchData: (state, action) => {
       const updatedData = { ...state, ...action.payload };
       return updatedData;
     },
-    changeName: (state, action) => {
-      state.name = action.payload;
+    createMaze: (state, action) => {
+      const updatedData = { ...state, ...action.payload };
+      return updatedData;
     }
   },
 });
 
 // actionをエクスポート
-export const {
-  fetch, changeName
-} = floorSlice.actions;
+export const { fetchData, createMaze } = floorSlice.actions;
 
 // reducerをエクスポート
-export const user = floorSlice.reducer;
+export const floorReducer = floorSlice.reducer;

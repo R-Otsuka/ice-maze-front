@@ -1,16 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
-import counterReducer from './slice/counter'
-import iceReducer from './slice/floor'
-import dashboardReducer from './slice/dashboard'
 import logger from 'redux-logger'
+
+import { floorReducer } from './slice/floor'
+import { dashboardReducer } from './slice/dashboard'
+
+const reducer = {
+  floor: floorReducer,
+  dashboard: dashboardReducer,
+}
 
 // reducerをstoreに登録
 export default configureStore({
-  reducer: {
-    counter: counterReducer,
-    ice: iceReducer,
-    dashboard: dashboardReducer,
-  },
+  reducer,
   middleware: [thunk, logger]
-})
+});
