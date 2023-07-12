@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
-import counterReducer from './reducers/counterSlice'
-import iceReducer from './reducers/iceSlice'
-import dashboardReducer from './reducers/dashboardSlice'
+import counterReducer from './slice/counter'
+import iceReducer from './slice/floor'
+import dashboardReducer from './slice/dashboard'
 import logger from 'redux-logger'
 
 // reducerをstoreに登録

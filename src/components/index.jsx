@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from "react-router-dom"
-import { fetchSync } from '../reducers/iceSlice'
+import { fetchSync } from '../slice/floor'
 
 export const Dashboard = () => {
   // const dispatch = useDispatch();
@@ -13,10 +13,10 @@ export const Dashboard = () => {
     <div>
       <button
         onClick={() => {
-          navigate("/ice", { state: { id: 1 } })
+          navigate("/ice")
         }}
       >
-        sss
+        氷の迷路
       </button>
     </div>
   )

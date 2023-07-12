@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../reducers/counterSlice'
+import { decrement, increment } from '../slice/counter'
 
 // 作るのは氷の床
 export const Count = () => {
