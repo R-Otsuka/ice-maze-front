@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server  --open",
+    "start": "webpack-dev-server",
     "build": "webpack",
     "watch": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,8 +25,8 @@
     "@babel/polyfill": "^7.12.1",
     "@types/react": "^17.0.40",
     "html-webpack-plugin": "^5.5.0",
-    "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
@@ -38,7 +38,9 @@
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
     "babel-loader": "^8.2.5",
+    "css-loader": "^6.8.1",
     "lodash": "^4.17.21",
+    "node-sass": "^9.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^8.0.1",
@@ -46,6 +48,10 @@
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
+    "sass": "^1.63.6",
+    "sass-loader": "^13.3.2",
+    "scss-loader": "^0.0.1",
+    "style-loader": "^3.3.3",
     "ts-loader": "^9.2.8"
   }
 }

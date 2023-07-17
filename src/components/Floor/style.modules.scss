@@ -1,0 +1,10 @@
+.row {
+  display: flex;
+  & .cell {
+    width: 10px;
+    height: 10px;
+    &.ice {
+      background-color: black;
+    }
+  }
+}

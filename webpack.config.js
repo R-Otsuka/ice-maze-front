@@ -8,13 +8,13 @@ module.exports = {
   mode: "development",
 
   // メインとなるJavaScriptファイル（エントリーポイント）
-  entry: "./src/app.jsx",
+  entry: "./src/App.jsx",
   // ファイルの出力設定
   output: {
     //  出力ファイルのディレクトリ名
     path: `${__dirname}/public`,
     // 出力ファイル名
-    filename: "app.js",
+    filename: "bundle.js",
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -31,11 +31,20 @@ module.exports = {
         // TypeScript をコンパイルする
         use: "babel-loader",
       },
+      {
+        test: /\.(css|scss|sass)$/,
+        // 下から順に適用される
+        use: [
+          'style-loader',  // JS 内にある CSS を <head> にインラインで出力する loader
+          'css-loader', // CSS を JS で扱えるようにする loader
+          'sass-loader'  // sass | scss の変換
+        ],
+      },
     ],
   },
   // import 文で .ts や .tsx ファイルを解決するため
   resolve: {
-    extensions: [".js", ".jsx", ".js", ".json"],
+    extensions: [".js", ".jsx", ".js", ".json", ".scss", ".css"],
   },
   // devServerのoptionについて
   // https://zenn.dev/sa2knight/articles/9b19ffd391bca87d7b8c#historyapifallback
