@@ -40,7 +40,7 @@
     "babel-loader": "^8.2.5",
     "css-loader": "^6.8.1",
     "lodash": "^4.17.21",
-    "node-sass": "^9.0.0",
+    "expressss": "^9.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^8.0.1",

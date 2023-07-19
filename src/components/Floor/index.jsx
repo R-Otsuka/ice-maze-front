@@ -8,19 +8,19 @@ import styles from "./style.modules.scss";
 
 export const Floor = () => {
   const dispatch = useDispatch();
-  const maze = useSelector((state)  => state.floor.value) || [[0, 1, 1], [0, 0, 0], [1, 0, 0]];
+  const maze = useSelector((state)  => state.floor.map) || [[0, 1, 1], [0, 0, 0], [1, 0, 0]];
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    dispatch(fetchData());
-  }, []);
+  // useEffect(() => {
+  //   () => dispatch(fetchData());
+  // }, []);
 
-  console.log(maze);
+  console.log(maze, 'maze');
   console.log(styles);
 
 
-  const createMap = (maze) => {
+  const renderMap = (maze) => {
     const content = (
       <div>
         {_.map(maze, (row) => {
@@ -42,16 +42,15 @@ export const Floor = () => {
     <div>
       <div styleName="head">
         <button
-          // onClick={() => {
-          //   // api通信部分
-          //   createMaze()
-          // }}
+          onClick={() => {
+            dispatch(createMaze());
+          }}
         >
           迷路を作る
         </button>
       </div>
       <div styleName="body">
-        {createMap(maze)}
+        {renderMap(maze)}
       </div>
     </div>
   )
