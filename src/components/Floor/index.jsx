@@ -1,5 +1,6 @@
 import _, { replace } from 'lodash';
 import React, { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from "react-router-dom"
@@ -12,9 +13,13 @@ export const Floor = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   () => dispatch(fetchData());
-  // }, []);
+  useEffect(() => {
+    // () => dispatch(fetchData());
+    const start = dayjs();
+    const end = dayjs().add(20, 'day');
+    const diff = end.diff(start, 'month');
+    console.log(diff, 'diff');
+  }, []);
 
   console.log(maze, 'maze');
   console.log(styles);
