@@ -9,12 +9,14 @@ import styles from "./style.modules.scss";
 import Button from '@mui/material/Button';
 import ice from '../../img/ice_maze/ice.jpg';
 import rock from '../../img/ice_maze/rock.jpg';
+import satoshi from '../../img/ice_maze/satoshi.jpg';
 
 export const Floor = () => {
   const dispatch = useDispatch();
   const maze = useSelector((state)  => state.floor.map) || [[0, 1, 1], [0, 0, 0], [1, 0, 0]];
   const navigate = useNavigate();
   const location = useLocation();
+  const [position, setPosition] = useState({ x: 0, y: 0, rotate: 90 });
 
   useEffect(() => {
     () => dispatch(fetchData());
@@ -24,13 +26,17 @@ export const Floor = () => {
   }, []);
 
 
+
   const renderMap = (maze) => {
     const content = (
       <div className={styles.map}>
-        {_.map(maze, (row, index) => {
+        {_.map(maze, (row, y) => {
           return (
-            <div className={styles.row} key={index}>
-              {_.map(row, (val) => {
+            <div className={styles.row}>
+              {_.map(row, (val, x) => {
+                if (x === position.x && y === position.y) {
+                  return <img src={satoshi} />
+                }
                 return <img src={val ? rock : ice} />
               })}
             </div>
