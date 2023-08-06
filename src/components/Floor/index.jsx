@@ -10,13 +10,29 @@ import Button from '@mui/material/Button';
 import ice from '../../img/ice_maze/ice.jpg';
 import rock from '../../img/ice_maze/rock.jpg';
 import satoshi from '../../img/ice_maze/satoshi.jpg';
+import { usePressKeyStatus } from '../../hooks/usePressKeyStatus';
 
 export const Floor = () => {
   const dispatch = useDispatch();
   const maze = useSelector((state)  => state.floor.map) || [[0, 1, 1], [0, 0, 0], [1, 0, 0]];
   const navigate = useNavigate();
   const location = useLocation();
-  const [position, setPosition] = useState({ x: 0, y: 0, rotate: 90 });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const DIRECTION = { left: { x: -1, y: 0 }, right: { x: 1, y: 0 }, up: { x: 0, y: -1 }, down: { x: 0, y: 1 } };
+  const calculateNewPosition = (keyType) => {
+    console.log(DIRECTION[keyType], 'keyType');
+    const { x: _x, y: _y } = DIRECTION[keyType];
+    console.log(_x, _y);
+    const newPosition = (x, y) => {
+      // 20 === mazeのサイズ、TODO: 可変にする
+      if (x + _x < 0 || x + _x >= 20 || y + _y < 0 || y + _y >= 20 || maze[y + _y][x + _x]) {
+        return { x, y };
+      }
+      return newPosition(x + _x, y + _y);
+    }
+    return newPosition(position.x, position.y);
+  }
 
   useEffect(() => {
     () => dispatch(fetchData());
@@ -25,7 +41,16 @@ export const Floor = () => {
     const diff = end.diff(start, 'month');
   }, []);
 
-
+  const stateOfKey = usePressKeyStatus();
+  useEffect(() => {
+    const keyType = _.findKey(stateOfKey, (val, key) => val);
+    if (!keyType) {
+      return;
+    }
+    const newPosition = calculateNewPosition(keyType);
+    console.log(newPosition);
+    setPosition(newPosition);
+  }, [stateOfKey]);
 
   const renderMap = (maze) => {
     const content = (

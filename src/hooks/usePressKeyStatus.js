@@ -20,13 +20,19 @@ export const usePressKeyStatus = () => {
 		if (keyCode === 38) {//up
 			setStateOfPressKey(state => ({
 				...state,
-				top: false
+				up: false
+			}));
+    }
+    if (keyCode === 40) {//down
+			setStateOfPressKey(state => ({
+				...state,
+				down: false
 			}));
 		}
 	}, []);
 
 	const handleKeyDown = useCallback((e) => {
-		const keyCode = e.keyCode;
+    const keyCode = e.keyCode;
 
 		if (keyCode === 37) {// left
 			setStateOfPressKey(state => ({
@@ -43,11 +49,18 @@ export const usePressKeyStatus = () => {
 		if (keyCode === 38) {//up
 			setStateOfPressKey(state => ({
 				...state,
-				top: true
+				up: true
+			}));
+    }
+    if (keyCode === 40) {//down
+			setStateOfPressKey(state => ({
+				...state,
+				down: true
 			}));
 		}
 	}, []);
 
+  //
 	useEffect(() => {
 		addEventListener('keydown', e => handleKeyDown(e));
 		addEventListener('keyup', e => handleKeyUp(e));
