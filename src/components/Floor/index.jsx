@@ -32,7 +32,6 @@ export const Floor = () => {
             <div className={styles.row} key={index}>
               {_.map(row, (val) => {
                 return <img src={val ? rock : ice} />
-                // return <div className={`${styles.cell} ${val ? styles.ice : styles.stone}`}></div>
               })}
             </div>
           )
