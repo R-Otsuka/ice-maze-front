@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import ice from '../../img/ice_maze/ice.jpg';
 import rock from '../../img/ice_maze/rock.jpg';
 import satoshi from '../../img/ice_maze/satoshi.jpg';
+import ball from '../../img/ice_maze/ball.jpg';
 import { usePressKeyStatus } from '../../hooks/usePressKeyStatus';
 
 export const Floor = () => {
@@ -20,18 +21,18 @@ export const Floor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const DIRECTION = { left: { x: -1, y: 0 }, right: { x: 1, y: 0 }, up: { x: 0, y: -1 }, down: { x: 0, y: 1 } };
-  const calculateNewPosition = (keyType) => {
-    console.log(DIRECTION[keyType], 'keyType');
-    const { x: _x, y: _y } = DIRECTION[keyType];
-    console.log(_x, _y);
-    const newPosition = (x, y) => {
+  const calculateNewPosition = (x, y, dx, dy) => {
       // 20 === mazeのサイズ、TODO: 可変にする
-      if (x + _x < 0 || x + _x >= 20 || y + _y < 0 || y + _y >= 20 || maze[y + _y][x + _x]) {
+    console.log(x, y, dx, dy, typeof x, typeof y, typeof dx, typeof dy, 'calculateNewPosition');
+      if (x + dx < 0 || x + dx >= 20 || y + dy < 0 || y + dy >= 20 || maze[y + dy][x + dx]) {
         return { x, y };
       }
-      return newPosition(x + _x, y + _y);
+      return calculateNewPosition(x + dx, y + dy, dx, dy);
     }
-    return newPosition(position.x, position.y);
+  const newPosition = (keyType) => {
+    const { x: _x, y: _y } = DIRECTION[keyType];
+    console.log(position.x, position.y, _x, _y, 'newPosition');
+    return calculateNewPosition(position.x, position.y, _x, _y);
   }
 
   useEffect(() => {
@@ -47,10 +48,16 @@ export const Floor = () => {
     if (!keyType) {
       return;
     }
-    const newPosition = calculateNewPosition(keyType);
-    console.log(newPosition);
-    setPosition(newPosition);
+    console.log(keyType, 'keyType');
+    setPosition(newPosition(keyType));
   }, [stateOfKey]);
+
+  const iconMap = {
+    2: rock,
+    1: ice,
+    's': satoshi,
+    'g': ball,
+  }
 
   const renderMap = (maze) => {
     const content = (
@@ -59,10 +66,9 @@ export const Floor = () => {
           return (
             <div className={styles.row}>
               {_.map(row, (val, x) => {
-                if (x === position.x && y === position.y) {
-                  return <img src={satoshi} />
-                }
-                return <img src={val ? rock : ice} />
+                return iconMap[val]
+                  ? <img src={iconMap[val]} className={styles.cell} />
+                  : <span className={styles.cell} />;
               })}
             </div>
           )
