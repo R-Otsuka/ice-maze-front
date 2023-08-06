@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from "react-router-dom"
 import { fetchData, createMaze } from '../../slice/floor'
 import styles from "./style.modules.scss";
+import Button from '@mui/material/Button';
+import ice from '../../img/ice_maze/ice.jpg';
+import rock from '../../img/ice_maze/rock.jpg';
 
 export const Floor = () => {
   const dispatch = useDispatch();
@@ -26,10 +29,10 @@ export const Floor = () => {
       <div className={styles.map}>
         {_.map(maze, (row, index) => {
           return (
-            // エラー邪魔なので、止む無しkey=index
             <div className={styles.row} key={index}>
               {_.map(row, (val) => {
-                return <div className={`${styles.cell} ${val ? styles.ice : styles.stone}`}></div>
+                return <img src={val ? rock : ice} />
+                // return <div className={`${styles.cell} ${val ? styles.ice : styles.stone}`}></div>
               })}
             </div>
           )
