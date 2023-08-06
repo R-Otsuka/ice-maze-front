@@ -1,10 +1,25 @@
-.row {
-  display: flex;
-  & .cell {
-    width: 10px;
-    height: 10px;
-    &.ice {
-      background-color: black;
+
+.header {
+  margin: 10px 0;
+}
+
+.body {
+  & .map {
+    & .row {
+      display: flex;
+      & .cell {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #999;
+        &.ice {
+          // TODO: 氷床画像に置き換える
+          background-color: #A0E0F0;
+        }
+        &.stone {
+          // TODO: 石画像に置き換える
+          background-color: #C0C0C0;
+        }
+      }
     }
   }
 }

@@ -14,25 +14,22 @@ export const Floor = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // () => dispatch(fetchData());
+    () => dispatch(fetchData());
     const start = dayjs();
     const end = dayjs().add(20, 'day');
     const diff = end.diff(start, 'month');
-    console.log(diff, 'diff');
   }, []);
-
-  console.log(maze, 'maze');
-  console.log(styles);
 
 
   const renderMap = (maze) => {
     const content = (
-      <div>
-        {_.map(maze, (row) => {
+      <div className={styles.map}>
+        {_.map(maze, (row, index) => {
           return (
-            <div className={styles.row}>
+            // エラー邪魔なので、止む無しkey=index
+            <div className={styles.row} key={index}>
               {_.map(row, (val) => {
-                return <div className={`${styles.cell} ${val === 1 && styles.ice}`}></div>
+                return <div className={`${styles.cell} ${val ? styles.ice : styles.stone}`}></div>
               })}
             </div>
           )
@@ -45,7 +42,7 @@ export const Floor = () => {
 
   return (
     <div>
-      <div styleName="head">
+      <div className={styles.header}>
         <button
           onClick={() => {
             dispatch(createMaze());
@@ -54,7 +51,7 @@ export const Floor = () => {
           迷路を作る
         </button>
       </div>
-      <div styleName="body">
+      <div className={styles.body}>
         {renderMap(maze)}
       </div>
     </div>
