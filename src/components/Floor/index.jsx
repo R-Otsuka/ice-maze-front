@@ -15,32 +15,36 @@ import { usePressKeyStatus } from '../../hooks/usePressKeyStatus';
 
 export const Floor = () => {
   const dispatch = useDispatch();
-  const maze = useSelector((state)  => state.floor.map) || [[0, 1, 1], [0, 0, 0], [1, 0, 0]];
+  const maze = useSelector((state) => state.floor.map) || [[]];
+  const start = useSelector((state) => state.floor.start);
+  const goal = useSelector((state) => state.floor.goal);
   const navigate = useNavigate();
   const location = useLocation();
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({});
 
   const DIRECTION = { left: { x: -1, y: 0 }, right: { x: 1, y: 0 }, up: { x: 0, y: -1 }, down: { x: 0, y: 1 } };
   const calculateNewPosition = (x, y, dx, dy) => {
       // 20 === mazeのサイズ、TODO: 可変にする
     console.log(x, y, dx, dy, typeof x, typeof y, typeof dx, typeof dy, 'calculateNewPosition');
-      if (x + dx < 0 || x + dx >= 20 || y + dy < 0 || y + dy >= 20 || maze[y + dy][x + dx]) {
+    console.log(y + dy, x + dx);
+    if (x + dx < 0 || x + dx >= 20 || y + dy < 0 || y + dy >= 20 || maze[y + dy][x + dx] !== 1) {
+        console.log(x, y, 'return');
         return { x, y };
       }
       return calculateNewPosition(x + dx, y + dy, dx, dy);
     }
   const newPosition = (keyType) => {
     const { x: _x, y: _y } = DIRECTION[keyType];
-    console.log(position.x, position.y, _x, _y, 'newPosition');
     return calculateNewPosition(position.x, position.y, _x, _y);
   }
 
   useEffect(() => {
     () => dispatch(fetchData());
-    const start = dayjs();
-    const end = dayjs().add(20, 'day');
-    const diff = end.diff(start, 'month');
   }, []);
+
+  useEffect(() => {
+    setPosition(start);
+  }, [start]);
 
   const stateOfKey = usePressKeyStatus();
   useEffect(() => {
@@ -48,7 +52,6 @@ export const Floor = () => {
     if (!keyType) {
       return;
     }
-    console.log(keyType, 'keyType');
     setPosition(newPosition(keyType));
   }, [stateOfKey]);
 
@@ -66,6 +69,9 @@ export const Floor = () => {
           return (
             <div className={styles.row}>
               {_.map(row, (val, x) => {
+                if (position.x === x && position.y === y) {
+                  return <img src={satoshi} className={styles.cell} />
+                }
                 return iconMap[val]
                   ? <img src={iconMap[val]} className={styles.cell} />
                   : <span className={styles.cell} />;

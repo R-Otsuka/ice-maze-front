@@ -1,5 +1,5 @@
 import axios from 'axios';
-import _ from 'lodash';
+import _, { update } from 'lodash';
 
 import { createSlice } from '@reduxjs/toolkit'
 import { useParams } from 'react-router-dom';
@@ -9,6 +9,11 @@ const API_PATH = 'floor';
 
 const initialState = {
   map: [[]],
+  start: { x: 0, y: 0 },
+  goal: { x: 0, y: 0 },
+  stone_count: 0,
+  floor_length: 0,
+  score: 0,
   value: 0,
 };
 
@@ -24,8 +29,8 @@ const floorSlice = createSlice({
       return updatedData;
     },
     create: (state, action) => {
-      console.log(action, 'action');
       const updateData = { ...state, ...action.payload };
+      console.log(updateData, 'updateData')
       return updateData;
     },
   }
@@ -54,7 +59,8 @@ export const createMaze = () => {
       .get(url)
       .then((res) => {
         console.log(res.data, 'res');
-        dispatch(floorSlice.actions.create({ map: res.data }));
+        dispatch(floorSlice.actions.create(res.data ));
+
       }).catch((error) => {
         dispatch(createError({ message: 'mapの作成に失敗しました' }));
       });
