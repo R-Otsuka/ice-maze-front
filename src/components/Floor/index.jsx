@@ -15,25 +15,22 @@ import { usePressKeyStatus } from '../../hooks/usePressKeyStatus';
 
 export const Floor = () => {
   const dispatch = useDispatch();
-  const maze = useSelector((state) => state.floor.map) || [[]];
-  const start = useSelector((state) => state.floor.start);
-  const goal = useSelector((state) => state.floor.goal);
+  const { map, start, goal, score } = useSelector((state) => state.floor);
   const navigate = useNavigate();
   const location = useLocation();
   const [position, setPosition] = useState({});
+  const [stepCount, setStepCount] = useState(0);
 
   const DIRECTION = { left: { x: -1, y: 0 }, right: { x: 1, y: 0 }, up: { x: 0, y: -1 }, down: { x: 0, y: 1 } };
   const calculateNewPosition = (x, y, dx, dy) => {
-      // 20 === mazeのサイズ、TODO: 可変にする
-    console.log(x, y, dx, dy, typeof x, typeof y, typeof dx, typeof dy, 'calculateNewPosition');
-    console.log(y + dy, x + dx);
-    if (x + dx < 0 || x + dx >= 20 || y + dy < 0 || y + dy >= 20 || maze[y + dy][x + dx] !== 1) {
+      // 22 === mapのサイズ、TODO: 可変にす
+    if (x + dx < 0 || x + dx >= 22 || y + dy < 0 || y + dy >= 22 || map[y + dy][x + dx] !== 1) {
         console.log(x, y, 'return');
         return { x, y };
       }
       return calculateNewPosition(x + dx, y + dy, dx, dy);
     }
-  const newPosition = (keyType) => {
+  const getNewPosition = (keyType) => {
     const { x: _x, y: _y } = DIRECTION[keyType];
     return calculateNewPosition(position.x, position.y, _x, _y);
   }
@@ -52,7 +49,12 @@ export const Floor = () => {
     if (!keyType) {
       return;
     }
-    setPosition(newPosition(keyType));
+    const newPosition = getNewPosition(keyType);
+    if (newPosition.x === position.x & newPosition.y === position.y) {
+      return;
+    }
+    setPosition(newPosition);
+    setStepCount(stepCount + 1);
   }, [stateOfKey]);
 
   const iconMap = {
@@ -62,10 +64,10 @@ export const Floor = () => {
     'g': ball,
   }
 
-  const renderMap = (maze) => {
+  const renderMap = (map) => {
     const content = (
       <div className={styles.map}>
-        {_.map(maze, (row, y) => {
+        {_.map(map, (row, y) => {
           return (
             <div className={styles.row}>
               {_.map(row, (val, x) => {
@@ -84,7 +86,6 @@ export const Floor = () => {
     return content;
   }
 
-
   return (
     <div>
       <div className={styles.header}>
@@ -96,8 +97,24 @@ export const Floor = () => {
           迷路を作る
         </button>
       </div>
+      <div className={styles.menu}>
+        <button
+          onClick={() => {
+            setPosition(start);
+            setStepCount(0);
+          }}
+        >
+          最初に戻る
+        </button>
+      </div>
+      <div>
+        カウント: <span>{stepCount}</span>
+      </div>
+      <div>
+        mapスコア: {score}
+      </div>
       <div className={styles.body}>
-        {renderMap(maze)}
+        {renderMap(map)}
       </div>
     </div>
   )

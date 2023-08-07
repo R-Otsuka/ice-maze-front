@@ -2,7 +2,9 @@
 .header {
   margin: 10px 0;
 }
-
+.menu {
+  display: flex;
+}
 .body {
   & .map {
     & .row {
