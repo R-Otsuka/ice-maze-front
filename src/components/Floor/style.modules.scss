@@ -10,6 +10,8 @@
   gap: 16px;
 }
 .body {
+  min-width: 100%;
+  position: relative;
   & .map {
     & .row {
       display: flex;
@@ -17,6 +19,27 @@
         width: 30px;
         height: 30px;
       }
+    }
+  }
+  & .answer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    &.hidden {
+      display: none;
+    }
+  }
+}
+.accordion {
+  display: flex;
+  align-items: center;
+  & .arrow {
+    transform: rotate(-90deg);
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    &.open {
+      transform: rotate(90deg);
     }
   }
 }

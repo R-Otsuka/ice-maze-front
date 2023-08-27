@@ -38,19 +38,19 @@ const floorSlice = createSlice({
 
 const { fetch, create } = floorSlice.actions;
 
-export const fetchData = () => {
-  const url = `${process.env.HOST}/${API_PATH}`;
-  console.log('北');
-  return async (dispatch) => {
-    axios
-      .get(url)
-      .then((res) => {
-        dispatch(fetch(res.data));
-      }).catch((error) => {
-        dispatch(createError({ message: 'mapの読み込みに失敗しました' }));
-      });
-  };
-};
+// export const fetchData = () => {
+//   const url = `${process.env.HOST}/${API_PATH}`;
+//   console.log('北');
+//   return async (dispatch) => {
+//     axios
+//       .get(url)
+//       .then((res) => {
+//         dispatch(fetch(res.data));
+//       }).catch((error) => {
+//         dispatch(createError({ message: 'mapの読み込みに失敗しました' }));
+//       });
+//   };
+// };
 
 export const createMaze = () => {
   const url = `${process.env.HOST}/${API_PATH}`;
@@ -63,6 +63,20 @@ export const createMaze = () => {
 
       }).catch((error) => {
         dispatch(createError({ message: 'mapの作成に失敗しました' }));
+      });
+  };
+};
+
+export const updateMaze = (data) => {
+  const url = `${process.env.HOST}/${API_PATH}`;
+  return async (dispatch) => {
+    axios
+      .put(url, data)
+      .then((res) => {
+        dispatch(floorSlice.actions.update(res.data ));
+
+      }).catch((error) => {
+        dispatch(createError({ message: 'mapの更新に失敗しました' }));
       });
   };
 };

@@ -1,10 +1,11 @@
 import _, { replace } from 'lodash';
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
+import clsx from 'clsx';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from "react-router-dom"
-import { fetchData, createMaze } from '../../slice/floor'
+import { createMaze, updateMaze } from '../../slice/floor'
 import styles from "./style.modules.scss";
 import Button from '@mui/material/Button';
 import ice from '../../img/ice_maze/ice.jpg';
@@ -12,12 +13,14 @@ import rock from '../../img/ice_maze/rock.jpg';
 import satoshi from '../../img/ice_maze/satoshi.jpg';
 import ball from '../../img/ice_maze/ball.jpg';
 import { usePressKeyStatus } from '../../hooks/usePressKeyStatus';
+import { useCanvas } from '../../hooks/useCanvas';
 
 export const Floor = () => {
   const dispatch = useDispatch();
   const { map, start, goal, score, min_steps, path } = useSelector((state) => state.floor);
   const navigate = useNavigate();
   const location = useLocation();
+  const { canvasRef, getContext } = useCanvas();
   const [position, setPosition] = useState({});
   const [stepCount, setStepCount] = useState(0);
   const [isShowAnswer, setIsShowAnswer] = useState(false);
@@ -37,8 +40,40 @@ export const Floor = () => {
   }
 
   useEffect(() => {
-    () => dispatch(fetchData());
+    // () => dispatch(fetchData());
   }, []);
+
+  useEffect(() => {
+    const ctx = getContext();
+    ctx.clearRect(0, 0, 630, 660);
+    ctx.strokeStyle = 'red';
+
+    // パスの開始
+    ctx.beginPath();
+    // 1本目
+    _.each(path, (val, i) => {
+      console.log(val, i, 'val, i');
+      const current = path[i];
+      const next = path[i + 1];
+      if (!next) {
+        return;
+      }
+      console.log(current.x * 30 + 15, current.y * 30 + 15);
+      console.log(next.x * 30 + 15, next.y * 30 + 15);
+      ctx.moveTo(current.x * 30 + 15, current.y * 30 + 15);
+      ctx.lineTo(next.x * 30 + 15, next.y * 30 + 15);
+    });
+    // ctx.moveTo(50, 40); // (x, y)
+    // ctx.lineTo(250, 40);
+    // // 2本目
+    // ctx.moveTo(50, 80);
+    // ctx.lineTo(250, 80);
+    // // 3本目
+    // ctx.moveTo(50, 120);
+    // ctx.lineTo(250, 120);
+    // 描画
+    ctx.stroke();
+  }, [path]);
 
   useEffect(() => {
     setPosition(start);
@@ -87,6 +122,15 @@ export const Floor = () => {
     return content;
   }
 
+  const renderAnswer = (map) => {
+    const context = (
+      <div>
+        <canvas width={630} height={660} className="canvas" ref={canvasRef} />
+      </div>
+    );
+    return context;
+  }
+
   return (
     <div>
       <div className={styles.header}>
@@ -115,15 +159,38 @@ export const Floor = () => {
         <span>難易度: {score}</span>
         <span>最小移動回数: {min_steps}</span>
       </div>
+      <div className={styles.flex}>
+        <button
+          onClick={() => {
+            dispatch(updateMaze(-1));
+          }}
+        >
+          難易度を下げる
+        </button>
+        <button
+          onClick={() => {
+            dispatch(updateMaze(1));
+          }}
+        >
+          難易度を上げる
+        </button>
+      </div>
       <div className={styles.body}>
         {renderMap(map)}
+          <div className={clsx(styles.answer, !isShowAnswer && styles.hidden)}>
+            {renderAnswer(map)}
+          </div>
       </div>
       <div>
-        <span
+        <div
+          className={styles.accordion}
           onClick={() => {
             setIsShowAnswer(!isShowAnswer)
           }}
-        >{isShowAnswer ? '答えを閉じる' : '答えを見る'}></span>
+        >
+          <div>{isShowAnswer ? '答えを閉じる' : '答えを見る'}</div>
+          <div className={clsx(styles.arrow, isShowAnswer && styles.open)}>&gt;</div>
+        </div>
         {isShowAnswer && (
           <>
             {_.map(path, (val, i) => {
