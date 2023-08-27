@@ -15,11 +15,12 @@ import { usePressKeyStatus } from '../../hooks/usePressKeyStatus';
 
 export const Floor = () => {
   const dispatch = useDispatch();
-  const { map, start, goal, score } = useSelector((state) => state.floor);
+  const { map, start, goal, score, min_steps, path } = useSelector((state) => state.floor);
   const navigate = useNavigate();
   const location = useLocation();
   const [position, setPosition] = useState({});
   const [stepCount, setStepCount] = useState(0);
+  const [isShowAnswer, setIsShowAnswer] = useState(false);
 
   const DIRECTION = { left: { x: -1, y: 0 }, right: { x: 1, y: 0 }, up: { x: 0, y: -1 }, down: { x: 0, y: 1 } };
   const calculateNewPosition = (x, y, dx, dy) => {
@@ -108,13 +109,30 @@ export const Floor = () => {
         </button>
       </div>
       <div>
-        カウント: <span>{stepCount}</span>
+        移動回数: <span>{stepCount}</span>
       </div>
-      <div>
-        mapスコア: {score}
+      <div className={styles.flex}>
+        <span>難易度: {score}</span>
+        <span>最小移動回数: {min_steps}</span>
       </div>
       <div className={styles.body}>
         {renderMap(map)}
+      </div>
+      <div>
+        <span
+          onClick={() => {
+            setIsShowAnswer(!isShowAnswer)
+          }}
+        >{isShowAnswer ? '答えを閉じる' : '答えを見る'}></span>
+        {isShowAnswer && (
+          <>
+            {_.map(path, (val, i) => {
+              return (
+                <div>[x, y] = [{val.x}, {val.y}]</div>
+              )
+            })}
+          </>
+        )}
       </div>
     </div>
   )

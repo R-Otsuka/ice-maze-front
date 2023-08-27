@@ -5,6 +5,10 @@
 .menu {
   display: flex;
 }
+.flex {
+  display: flex;
+  gap: 16px;
+}
 .body {
   & .map {
     & .row {
