@@ -67,11 +67,12 @@ export const createMaze = () => {
   };
 };
 
-export const updateMaze = (data) => {
-  const url = `${process.env.HOST}/${API_PATH}`;
+export const evolveMaze = (data) => {
+  const url = `${process.env.HOST}/${API_PATH}/evolve`;
+  console.log(data, 'data');
   return async (dispatch) => {
     axios
-      .put(url, data)
+      .post(url, data)
       .then((res) => {
         dispatch(floorSlice.actions.update(res.data ));
 

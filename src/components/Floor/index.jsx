@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from "react-router-dom"
-import { createMaze, updateMaze } from '../../slice/floor'
+import { createMaze, evolveMaze } from '../../slice/floor'
 import styles from "./style.modules.scss";
 import Button from '@mui/material/Button';
 import ice from '../../img/ice_maze/ice.jpg';
@@ -162,14 +162,14 @@ export const Floor = () => {
       <div className={styles.flex}>
         <button
           onClick={() => {
-            dispatch(updateMaze(-1));
+            dispatch(evolveMaze(-1));
           }}
         >
           難易度を下げる
         </button>
         <button
           onClick={() => {
-            dispatch(updateMaze(1));
+            dispatch(evolveMaze(1));
           }}
         >
           難易度を上げる
