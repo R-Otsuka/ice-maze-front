@@ -1,8 +1,7 @@
 import axios from 'axios';
-import _, { update } from 'lodash';
+import _ from 'lodash';
 
 import { createSlice } from '@reduxjs/toolkit'
-import { useParams } from 'react-router-dom';
 import { createError } from './error';
 
 const API_PATH = 'floor';
@@ -18,7 +17,6 @@ const initialState = {
 };
 
 const url = `${process.env.HOST}/${API_PATH}`;
-console.log(url);
 
 const floorSlice = createSlice({
   name: 'floor',
@@ -30,27 +28,10 @@ const floorSlice = createSlice({
     },
     create: (state, action) => {
       const updateData = { ...state, ...action.payload };
-      console.log(updateData, 'updateData')
       return updateData;
     },
   }
 });
-
-const { fetch, create } = floorSlice.actions;
-
-// export const fetchData = () => {
-//   const url = `${process.env.HOST}/${API_PATH}`;
-//   console.log('北');
-//   return async (dispatch) => {
-//     axios
-//       .get(url)
-//       .then((res) => {
-//         dispatch(fetch(res.data));
-//       }).catch((error) => {
-//         dispatch(createError({ message: 'mapの読み込みに失敗しました' }));
-//       });
-//   };
-// };
 
 export const createMaze = () => {
   const url = `${process.env.HOST}/${API_PATH}`;
@@ -58,7 +39,6 @@ export const createMaze = () => {
     axios
       .get(url)
       .then((res) => {
-        console.log(res.data, 'res');
         dispatch(floorSlice.actions.create(res.data ));
 
       }).catch((error) => {
@@ -69,7 +49,6 @@ export const createMaze = () => {
 
 export const evolveMaze = (data) => {
   const url = `${process.env.HOST}/${API_PATH}/evolve`;
-  console.log(data, 'data');
   return async (dispatch) => {
     axios
       .post(url, data)
@@ -82,7 +61,4 @@ export const evolveMaze = (data) => {
   };
 };
 
-// actionをエクスポート
-
-// reducerをエクスポート
 export const floorReducer = floorSlice.reducer;

@@ -5,25 +5,29 @@ export const usePressKeyStatus = () => {
 	const handleKeyUp = useCallback((e) => {
 		const keyCode = e.keyCode;
 
-		if (keyCode === 37) {// left
+		// left
+		if (keyCode === 37) {
 			setStateOfPressKey(state => ({
 				...state,
 				left: false
 			}));
 		}
-		if (keyCode === 39) {//right
+		// right
+		if (keyCode === 39) {
 			setStateOfPressKey(state => ({
 				...state,
 				right: false
 			}));
 		}
-		if (keyCode === 38) {//up
+		// up
+		if (keyCode === 38) {
 			setStateOfPressKey(state => ({
 				...state,
 				up: false
 			}));
     }
-    if (keyCode === 40) {//down
+		// down
+    if (keyCode === 40) {
 			setStateOfPressKey(state => ({
 				...state,
 				down: false
@@ -34,25 +38,29 @@ export const usePressKeyStatus = () => {
 	const handleKeyDown = useCallback((e) => {
     const keyCode = e.keyCode;
 
-		if (keyCode === 37) {// left
+		// left
+		if (keyCode === 37) {
 			setStateOfPressKey(state => ({
 				...state,
 				left: true
 			}));
 		}
-		if (keyCode === 39) {//right
+		// right
+		if (keyCode === 39) {
 			setStateOfPressKey(state => ({
 				...state,
 				right: true
 			}));
 		}
-		if (keyCode === 38) {//up
+		// up
+		if (keyCode === 38) {
 			setStateOfPressKey(state => ({
 				...state,
 				up: true
 			}));
     }
-    if (keyCode === 40) {//down
+		// down
+    if (keyCode === 40) {
 			setStateOfPressKey(state => ({
 				...state,
 				down: true
@@ -60,7 +68,6 @@ export const usePressKeyStatus = () => {
 		}
 	}, []);
 
-  //
 	useEffect(() => {
 		addEventListener('keydown', e => handleKeyDown(e));
 		addEventListener('keyup', e => handleKeyUp(e));
