@@ -8,7 +8,7 @@ module.exports = {
   mode: "development",
 
   // メインとなるJavaScriptファイル（エントリーポイント）
-  entry: "./src/App.jsx",
+  entry: "./src/App.tsx",
   // ファイルの出力設定
   output: {
     //  出力ファイルのディレクトリ名
@@ -26,10 +26,14 @@ module.exports = {
   module: {
     rules: [
       {
-        // 拡張子 .ts もしくは .tsx の場合
         test: /\.jsx?$/,
-        // TypeScript をコンパイルする
         use: "babel-loader",
+      },
+      {
+        // 拡張子 .tsx の場合
+        test: /\.tsx?$/,
+        // TypeScript をコンパイルする
+        use: 'ts-loader',
       },
       {
         test: /\.(css|scss|sass)$/,
@@ -52,12 +56,18 @@ module.exports = {
               },
           },
         ],
-      }
+      },
+      {
+        // 拡張子 .ts の場合
+        test: /\.ts$/,
+        // TypeScript をコンパイルする
+        use: 'ts-loader',
+      },
     ],
   },
   // import 文で .ts や .tsx ファイルを解決するため
   resolve: {
-    extensions: [".js", ".jsx", ".js", ".json", ".scss", ".css"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".scss", ".css"],
   },
   // devServerのoptionについて
   // https://zenn.dev/sa2knight/articles/9b19ffd391bca87d7b8c#historyapifallback

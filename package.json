@@ -23,7 +23,7 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/polyfill": "^7.12.1",
-    "@types/react": "^17.0.40",
+    "@types/react": "^17.0.65",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "webpack": "^5.88.1",
@@ -40,7 +40,9 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.3",
     "@reduxjs/toolkit": "^1.8.1",
-    "@types/react-dom": "^17.0.13",
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.6.0",
+    "@types/react-dom": "^17.0.20",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
     "babel-loader": "^8.2.5",
@@ -58,6 +60,7 @@
     "sass-loader": "^13.3.2",
     "scss-loader": "^0.0.1",
     "style-loader": "^3.3.3",
-    "ts-loader": "^9.2.8"
+    "ts-loader": "^9.2.8",
+    "typescript": "^5.2.2"
   }
 }

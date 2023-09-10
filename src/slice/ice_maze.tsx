@@ -33,7 +33,6 @@ const iceMazeSlice = createSlice({
 
 export const createMaze = () => {
   const url = `${process.env.HOST}/${API_PATH}/map`;
-  console.log('create');
   return async (dispatch) => {
     axios
       .get(url)
