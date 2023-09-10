@@ -8,12 +8,11 @@ const API_PATH = 'error';
 
 const initialState = {
   message: '',
-  code: 0,
   description: '',
 };
 
 const errorSlice = createSlice({
-  name: 'error',
+  name: API_PATH,
   initialState,
   reducers: {
     createError: (state, action) => {

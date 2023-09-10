@@ -6,14 +6,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import store from './store'
 
 import Dashboard from './components/Dashboard';
-import Floor from './components/Floor';
+import IceMaze from './components/IceMaze';
 
 ReactDom.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/floor" element={<Floor />} />
+        <Route path="/ice_maze" element={<IceMaze />} />
       </Routes>
     </BrowserRouter>
   </Provider>,

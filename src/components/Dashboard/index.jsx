@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from "react-router-dom"
-import { floorAction } from '../../slice/floor'
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -10,7 +9,7 @@ export const Dashboard = () => {
     <div>
       <button
         onClick={() => {
-          navigate("/floor");
+          navigate("/ice_maze");
         }}
       >
         氷の迷路

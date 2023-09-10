@@ -2,12 +2,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
 import logger from 'redux-logger'
 
-import { floorReducer } from './slice/floor'
-import { dashboardReducer } from './slice/dashboard'
+import { iceMazeReducer } from './slice/ice_maze'
+import { errorReducer } from './slice/error';
 
 const reducer = {
-  floor: floorReducer,
-  dashboard: dashboardReducer,
+  error: errorReducer,
+  ice_maze: iceMazeReducer,
 }
 
 // reducerをstoreに登録
