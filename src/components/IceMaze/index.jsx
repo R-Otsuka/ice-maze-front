@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from "react-router-dom"
-import { createMaze, evolveMaze } from '../../slice/floor'
+import { createMaze, evolveMaze } from '../../slice/ice_maze'
 import styles from "./style.modules.scss";
 import Button from '@mui/material/Button';
 import ice from '../../img/ice_maze/ice.jpg';
@@ -15,9 +15,9 @@ import ball from '../../img/ice_maze/ball.jpg';
 import { usePressKeyStatus } from '../../hooks/usePressKeyStatus';
 import { useCanvas } from '../../hooks/useCanvas';
 
-export const Floor = () => {
+export const IceMaze = () => {
   const dispatch = useDispatch();
-  const { map, start, goal, score, min_steps, path } = useSelector((state) => state.floor);
+  const { map, start, goal, score, min_steps, path } = useSelector((state) => state.ice_maze);
   const navigate = useNavigate();
   const location = useLocation();
   const { canvasRef, getContext } = useCanvas();
@@ -205,4 +205,4 @@ export const Floor = () => {
   )
 }
 
-export default Floor;
+export default IceMaze;

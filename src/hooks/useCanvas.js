@@ -6,7 +6,6 @@ export const useCanvas = () => {
 
 	const getContext = () => {
     const canvas = canvasRef.current;
-		console.log(canvas, canvasRef);
     return canvas.getContext('2d');
   };
   return { canvasRef, getContext };
