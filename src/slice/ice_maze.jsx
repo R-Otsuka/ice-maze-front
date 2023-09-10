@@ -38,11 +38,9 @@ export const createMaze = () => {
     axios
       .get(url)
       .then((res) => {
-        console.log(res, 'res');
         dispatch(iceMazeSlice.actions.create(res.data));
 
       }).catch((error) => {
-        console.log(error, 'error');
         dispatch(createError({ message: 'mapの作成に失敗しました' }));
       });
   };
