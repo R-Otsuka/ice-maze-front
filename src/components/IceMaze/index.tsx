@@ -6,8 +6,7 @@ import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from "react-router-dom"
 import { createMaze, evolveMaze } from '../../slice/ice_maze'
-import styles from "./style.modules.scss";
-import Button from '@mui/material/Button';
+import styles from "./style.module.scss";
 import ice from '../../img/ice_maze/ice.jpg';
 import rock from '../../img/ice_maze/rock.jpg';
 import satoshi from '../../img/ice_maze/satoshi.jpg';
