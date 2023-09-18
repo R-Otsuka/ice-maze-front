@@ -4,16 +4,32 @@ import _ from 'lodash';
 import { createSlice } from '@reduxjs/toolkit'
 import { createError } from './error';
 
+import { AppDispatch } from '../store';
+
 const API_PATH = 'ice_maze';
 
-const initialState = {
+export type Position = { x: number, y: number };
+export type Cell = 1 | 2 | 's' | 'g';
+interface IceMazeState {
+  map: Array<Array<Cell>>,
+  start: Position,
+  goal: Position,
+  stone_count: number,
+  size: number,
+  score: number,
+  min_steps: number,
+  path: Array<Position>,
+}
+
+const initialState: IceMazeState = {
   map: [[]],
   start: { x: 0, y: 0 },
   goal: { x: 0, y: 0 },
   stone_count: 0,
-  map_size: 0,
+  size: 0,
   score: 0,
-  value: 0,
+  min_steps: 0,
+  path: [],
 };
 
 const iceMazeSlice = createSlice({
@@ -31,9 +47,13 @@ const iceMazeSlice = createSlice({
   }
 });
 
+export const RootState = {
+  ice_maze: iceMazeSlice.reducer,
+};
+
 export const createMaze = () => {
   const url = `${process.env.HOST}/${API_PATH}/map`;
-  return async (dispatch) => {
+  return async (dispatch: AppDispatch) => {
     axios
       .get(url)
       .then((res) => {
@@ -47,7 +67,7 @@ export const createMaze = () => {
 
 export const evolveMaze = (data) => {
   const url = `${process.env.HOST}/${API_PATH}/evolve`;
-  return async (dispatch) => {
+  return async (dispatch: AppDispatch) => {
     axios
       .post(url, data)
       .then((res) => {

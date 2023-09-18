@@ -1,7 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export const usePressKeyStatus = () => {
-	const [stateOfPressKey, setStateOfPressKey] = useState({});
+export type KeyType = 'left' | 'right' | 'up' | 'down';
+type StateOfPressKey = {
+	[K in KeyType]: boolean;
+};
+
+export const usePressKeyStatus = (): StateOfPressKey => {
+	const [stateOfPressKey, setStateOfPressKey] = useState({} as StateOfPressKey);
 	const handleKeyUp = useCallback((e) => {
 		const keyCode = e.keyCode;
 

@@ -11,7 +11,11 @@ const reducer = {
 }
 
 // reducerをstoreに登録
-export default configureStore({
+export const store = configureStore({
   reducer,
   middleware: [thunk, logger]
 });
+
+// state型定義
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

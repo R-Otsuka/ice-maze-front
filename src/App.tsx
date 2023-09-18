@@ -3,7 +3,7 @@ import * as ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import store from './store'
+import { store } from './store'
 
 import Dashboard from './components/Dashboard';
 import IceMaze from './components/IceMaze';
